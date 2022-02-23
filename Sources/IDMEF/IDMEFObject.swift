@@ -1,6 +1,2 @@
-public struct IDMEFObject {
-    public private(set) var text = "Hello, World!"
 
-    public init() {
-    }
-}
+typealias IDMEFObject = Dictionary<String, Any>

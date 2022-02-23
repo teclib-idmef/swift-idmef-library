@@ -4,7 +4,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "Test swift-idmef-library",
-            "program": "${workspaceFolder:swift-idmef-library}/.build/debug/swift-idmef-libraryPackageTests.xctest",
+            "program": "${workspaceFolder:swift-idmef-library}/.build/debug/IDMEFPackageTests.xctest",
             "cwd": "${workspaceFolder:swift-idmef-library}",
             "preLaunchTask": "swift: Build All"
         }
