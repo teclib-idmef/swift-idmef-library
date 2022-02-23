@@ -65,3 +65,21 @@ func message2() -> IDMEFObject {
 
     return msg
 }
+
+func string2() -> String {
+    return "{\"Version\": \"2.0.3\",\n" +
+            "\"CreateTime\":\"2021-11-23T09:48:58.416374Z\",\n" +
+            "\"ID\":\"fae2ece1-ea54-461a-bedb-953495d6d39c\",\n" +
+            " \"Analyzer\": {\"IP\": \"127.0.0.1\",\n" +
+            "\t      \"Name\": \"foobar\",\n" +
+            "\t      \"Model\": \"generic\",\n" +
+            "\t      \"Category\": [\"LOG\"],\n" +
+            "\t      \"Data\": [\"Log\"],\n" +
+            "\t      \"Method\": [\"Monitor\"]},\n" +
+            " \"Sensor\": [{\"IP\": \"192.168.1.1\",\n" +
+            "\t     \"Name\": \"TheSensor\",\n" +
+            "\t     \"Model\": \"TheSensorModel\"},\n" +
+            "\t    {\"IP\": \"192.168.1.2\",\n" +
+            "\t     \"Name\": \"TheSensor2\",\n" +
+            "\t     \"Model\": \"TheSensor2Model\"}]}\n"
+}
