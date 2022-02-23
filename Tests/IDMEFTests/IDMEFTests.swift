@@ -11,4 +11,13 @@ final class IDMEFTests: XCTestCase {
         let msg = message2()
         XCTAssert(msg["ID"] is String)
     }
+
+    func test3() throws {
+        let msg = message1()
+        if let version = msg["Version"] as? String {
+            XCTAssertEqual(version, "2.0.3")
+        } else {
+            XCTFail()
+        }
+    }
 }
