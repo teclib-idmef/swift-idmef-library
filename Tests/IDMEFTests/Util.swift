@@ -19,6 +19,22 @@ func message1() -> IDMEFObject {
     return msg
 }
 
+func string1() -> String {
+    return  "{\n" +
+            "\"Version\":\"2.0.3\",\n" +
+            "\"CreateTime\":\"2021-11-22T14:42:51.881033Z\",\n" +
+            "\"ID\":\"09db946e-673e-49af-b4b2-a8cd9da58de6\",\n" +
+            "\"Analyzer\":{\n" +
+            "\"Category\":[\"LOG\"],\n" +
+            "\"IP\":\"127.0.0.1\",\n" +
+            "\"Model\":\"generic\",\n" +
+            "\"Data\":[\"Log\"],\n" +
+            "\"Method\":[\"Monitor\"],\n" +
+            "\"Name\":\"foobar\"\n" +
+            "}\n" +
+            "}\n"
+}
+
 func message2() -> IDMEFObject {
 	var  msg = IDMEFObject()
     msg.Version = "2.0.3"
