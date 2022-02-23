@@ -3,8 +3,12 @@ import XCTest
 
 final class IDMEFTests: XCTestCase {
     func test1() throws {
-        var io = IDMEFObject()
-        io["foo"] = "bar"
-        XCTAssert(io["foo"] is String)
+        let msg = message1()
+        XCTAssert(msg["Version"] is String)
+    }
+
+    func test2() throws {
+        let msg = message2()
+        XCTAssert(msg["ID"] is String)
     }
 }
