@@ -6,6 +6,7 @@ struct IDMEFObject : Codable {
     var ID: String?
     var CreateTime: String?
     var Analyzer: Analyzer?
+    var Sensor: [Sensor]?
 }
 
 struct Analyzer : Codable {
@@ -17,3 +18,8 @@ struct Analyzer : Codable {
     var Method: [String]?
 }
 
+struct Sensor : Codable {
+    var IP: String?
+    var Name: String?
+    var Model: String?
+}
