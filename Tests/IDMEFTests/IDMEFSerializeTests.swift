@@ -1,6 +1,5 @@
 import XCTest
 @testable import IDMEF
-
 func serialize(msg: IDMEFObject, outFile: String) {
     if let jsonString = msg.serialize() {
         do {
