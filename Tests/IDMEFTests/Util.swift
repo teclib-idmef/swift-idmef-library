@@ -6,7 +6,7 @@ func message1() -> IDMEFObject {
     msg["ID"] = "09db946e-673e-49af-b4b2-a8cd9da58de6"
     msg["CreateTime"] = "2021-11-22T14:42:51.881033Z"
 
-    var analyzer = IDMEFObject()
+    var analyzer = [AnyHashable:Any]()
     analyzer["IP"] = "127.0.0.1"
     analyzer["Name"] = "foobar"
     analyzer["Model"] = "generic"
@@ -41,7 +41,7 @@ func message2() -> IDMEFObject {
     msg["ID"] = "fae2ece1-ea54-461a-bedb-953495d6d39c"
     msg["CreateTime"] = "2021-11-23T09:48:58.416374Z"
 
-    var analyzer = IDMEFObject()
+    var analyzer = [AnyHashable:Any]()
     analyzer["IP"] = "127.0.0.1"
     analyzer["Name"] = "foobar"
     analyzer["Model"] = "generic"
@@ -51,12 +51,12 @@ func message2() -> IDMEFObject {
 
     msg["Analyzer"] = analyzer
 
-    var sensor1 = IDMEFObject()
+    var sensor1 = [AnyHashable:Any]()
     sensor1["IP"] = "192.168.1.1"
     sensor1["Name"] = "TheSensor"
     sensor1["Model"] = "TheSensorModel"
 
-    var sensor2 = IDMEFObject()
+    var sensor2 = [AnyHashable:Any]()
     sensor2["IP"] = "192.168.1.2"
     sensor2["Name"] = "TheSensor2"
     sensor2["Model"] = "TheSensor2Model"

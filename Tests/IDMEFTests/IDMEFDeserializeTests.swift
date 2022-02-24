@@ -10,8 +10,6 @@ func deserializeAndCheck(data: String, expected: IDMEFObject) -> IDMEFObject? {
         XCTAssertEqual(msg["Version"] as! String, expected["Version"] as! String)
 
         return msg
-    } else {
-        XCTFail()
     }
 
     return nil
@@ -23,11 +21,14 @@ final class IDMEFDeserializeTests: XCTestCase {
     }
 
     func test2() throws {
-        // let expected = message2()
-        // if let msg = deserializeAndCheck(data: string2(), expected: expected) {
-        //     XCTAssertEqual(msg["Sensor"][0].IP as! String, expected.Sensor?[0].IP)
-        // } else {
-        //     XCTFail()
-        // }
+        let expected = message2()
+        guard let msg = deserializeAndCheck(data: string2(), expected: expected) else {
+            return
+        }
+
+        let sensors = msg["Sensor"] as! [[AnyHashable:Any]]
+        let expectedSensors = expected["Sensor"] as! [[AnyHashable:Any]]
+                    
+        XCTAssertEqual(sensors[0]["IP"] as! String, expectedSensors[0]["IP"] as! String)
     }
 }
