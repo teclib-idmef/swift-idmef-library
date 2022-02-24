@@ -14,7 +14,7 @@ struct IDMEFObject : Codable {
             return String(data: jsonData, encoding: .utf8)
         }
 
-        return "error"
+        return nil
     }
 
     static func deserialize(jsonString: String) -> IDMEFObject? {
@@ -27,6 +27,7 @@ struct IDMEFObject : Codable {
         return nil
     }
 
+    
 }
 
 struct Analyzer : Codable {
