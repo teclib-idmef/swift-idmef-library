@@ -1,3 +1,3 @@
 # swift-idmef-library
 
-A description of this package.
+A Swift library for IDMEF V2 standard.
