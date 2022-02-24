@@ -1,46 +1,45 @@
 import Foundation
 
-struct IDMEFObject : Codable {
-    var Version: String?
-    var ID: String?
-    var CreateTime: String?
-    var Analyzer: Analyzer?
-    var Sensor: [Sensor]?
+struct IDMEFObject {
+    var content: [AnyHashable:Any]
+
+    init(content: [AnyHashable:Any]? = nil) {
+        if content != nil {
+            self.content = content!
+        } else {
+            self.content = [AnyHashable:Any]()
+        }
+    }
+
+    subscript(key: String) -> Any? {
+        get {
+            return content[key]
+        }
+        set(newValue) {
+            content[key] = newValue
+        }
+    }
 
     func serialize() -> String? {
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = .prettyPrinted
-        if let jsonData = try? encoder.encode(self) {
+        let nsDictionary = NSDictionary(dictionary: content)
+
+        if let jsonData = try? JSONSerialization.data(withJSONObject: nsDictionary, options: [.prettyPrinted]) {
             return String(data: jsonData, encoding: .utf8)
         }
 
         return nil
     }
 
+
     static func deserialize(jsonString: String) -> IDMEFObject? {
-        let decoder = JSONDecoder()
-        let jsonData = Data(jsonString.utf8)
-        if let msg = try? decoder.decode(IDMEFObject.self, from: jsonData) {
-            return msg
-        }
+        let jsonData = jsonString.data(using: .utf8)!
 
-        return nil
+        let object = try? JSONSerialization.jsonObject(with: jsonData, options: [])
+
+        // Cast to a Swift Dictionary
+        let dict = object as? [AnyHashable:Any]
+        
+        return IDMEFObject(content: dict)
     }
-
     
-}
-
-struct Analyzer : Codable {
-    var IP: String?
-    var Name: String?
-    var Model: String?
-    var Category: [String]?
-    var Data: [String]?
-    var Method: [String]?
-}
-
-struct Sensor : Codable {
-    var IP: String?
-    var Name: String?
-    var Model: String?
 }
