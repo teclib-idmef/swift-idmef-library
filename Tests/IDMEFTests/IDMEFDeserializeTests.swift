@@ -1,19 +1,18 @@
 import XCTest
 @testable import IDMEF
 
-func deserializeAndCheck(data: String, expected: IDMEFObject) -> IDMEFObject{
-    let decoder = JSONDecoder()
-    let jsonData = Data(data.utf8)
-    if let msg = try? decoder.decode(IDMEFObject.self, from: jsonData) {
+func deserializeAndCheck(data: String, expected: IDMEFObject) -> IDMEFObject? {
+    if let msg = IDMEFObject.deserialize(jsonString: data) {
         XCTAssertEqual(msg.ID, expected.ID)
         XCTAssertEqual(msg.CreateTime, expected.CreateTime)
         XCTAssertEqual(msg.Version, expected.Version)
+
         return msg
     } else {
         XCTFail()
     }
 
-    return IDMEFObject()
+    return nil
 }
 
 final class IDMEFDeserializeTests: XCTestCase {
@@ -23,7 +22,10 @@ final class IDMEFDeserializeTests: XCTestCase {
 
     func test2() throws {
         let expected = message2()
-        let msg = deserializeAndCheck(data: string2(), expected: expected)
-        XCTAssertEqual(msg.Sensor?[0].IP, expected.Sensor?[0].IP)
+        if let msg = deserializeAndCheck(data: string2(), expected: expected) {
+            XCTAssertEqual(msg.Sensor?[0].IP, expected.Sensor?[0].IP)
+        } else {
+            XCTFail()
+        }
     }
 }

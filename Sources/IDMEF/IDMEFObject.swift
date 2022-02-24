@@ -1,5 +1,4 @@
-
-//typealias IDMEFObject = Dictionary<String, Codable>
+import Foundation
 
 struct IDMEFObject : Codable {
     var Version: String?
@@ -7,6 +6,27 @@ struct IDMEFObject : Codable {
     var CreateTime: String?
     var Analyzer: Analyzer?
     var Sensor: [Sensor]?
+
+    func serialize() -> String? {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        if let jsonData = try? encoder.encode(self) {
+            return String(data: jsonData, encoding: .utf8)
+        }
+
+        return "error"
+    }
+
+    static func deserialize(jsonString: String) -> IDMEFObject? {
+        let decoder = JSONDecoder()
+        let jsonData = Data(jsonString.utf8)
+        if let msg = try? decoder.decode(IDMEFObject.self, from: jsonData) {
+            return msg
+        }
+
+        return nil
+    }
+
 }
 
 struct Analyzer : Codable {

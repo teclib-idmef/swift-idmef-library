@@ -2,20 +2,15 @@ import XCTest
 @testable import IDMEF
 
 func serialize(msg: IDMEFObject, outFile: String) {
-    let encoder = JSONEncoder()
-    encoder.outputFormatting = .prettyPrinted
-    if let jsonData = try? encoder.encode(msg) {
-        if let jsonString = String(data: jsonData, encoding: .utf8) {
-            do {
-                try jsonString.write(to: URL(fileURLWithPath: outFile), atomically: true, encoding: String.Encoding.utf8)
-            } catch {
-                XCTFail()
-            }            
+    if let jsonString = msg.serialize() {
+        do {
+            try jsonString.write(to: URL(fileURLWithPath: outFile), atomically: true, encoding: String.Encoding.utf8)
+        } catch {
+            XCTFail()
         }
     }
     
     XCTAssert(true)
-
 }
 
 final class IDMEFSerializeTests: XCTestCase {
