@@ -14,10 +14,18 @@ func serialize(msg: IDMEFObject, outFile: String) {
 
 final class IDMEFSerializeTests: XCTestCase {
     func test1() throws {
-        serialize(msg: message1(), outFile: "out1.json")
+        serialize(msg: IDMEFExample.message1(), outFile: "out1.json")
     } 
 
     func test2() throws {
-        serialize(msg: message2(), outFile: "out2.json")
+        serialize(msg: IDMEFExample.message2(), outFile: "out2.json")
+    }
+
+    func test3() throws {
+        serialize(msg: IDMEFExample.message1(fixed: false), outFile: "out1v.json")
+    } 
+
+    func test4() throws {
+        serialize(msg: IDMEFExample.message2(fixed: false), outFile: "out2v.json")
     }
 }

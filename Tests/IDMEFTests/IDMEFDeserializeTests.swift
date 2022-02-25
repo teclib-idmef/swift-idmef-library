@@ -17,12 +17,12 @@ func deserializeAndCheck(data: String, expected: IDMEFObject) -> IDMEFObject? {
 
 final class IDMEFDeserializeTests: XCTestCase {
     func test1() throws {
-        _ = deserializeAndCheck(data: string1(), expected: message1())
+        _ = deserializeAndCheck(data: IDMEFExample.string1(), expected: IDMEFExample.message1())
     }
 
     func test2() throws {
-        let expected = message2()
-        guard let msg = deserializeAndCheck(data: string2(), expected: expected) else {
+        let expected = IDMEFExample.message2()
+        guard let msg = deserializeAndCheck(data: IDMEFExample.string2(), expected: expected) else {
             return
         }
 
