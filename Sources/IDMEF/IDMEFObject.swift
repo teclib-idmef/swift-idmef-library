@@ -1,13 +1,14 @@
 import Foundation
+import JSONSchema
 
 struct IDMEFObject {
-    var content: [AnyHashable:Any]
+    var content: [String:Any]
 
-    init(content: [AnyHashable:Any]? = nil) {
+    init(content: [String:Any]? = nil) {
         if content != nil {
             self.content = content!
         } else {
-            self.content = [AnyHashable:Any]()
+            self.content = [String:Any]()
         }
     }
 
@@ -30,16 +31,16 @@ struct IDMEFObject {
         return nil
     }
 
-
-    static func deserialize(jsonString: String) -> IDMEFObject? {
-        let jsonData = jsonString.data(using: .utf8)!
-
-        let object = try? JSONSerialization.jsonObject(with: jsonData, options: [])
-
-        // Cast to a Swift Dictionary
-        let dict = object as? [AnyHashable:Any]
+    static func deserialize(json: String) -> IDMEFObject? {
+        let content = IDMEF.deserialize(jsonString: json)
         
-        return IDMEFObject(content: dict)
+        return IDMEFObject(content: content)
     }
     
+    func validate() throws -> Bool {
+        let errors = try JSONSchema.validate(content, schema: simpleSchema())
+
+        return errors.valid
+    }
+
 }

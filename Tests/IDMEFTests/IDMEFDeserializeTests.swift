@@ -2,7 +2,7 @@ import XCTest
 @testable import IDMEF
 
 func deserializeAndCheck(data: String, expected: IDMEFObject) -> IDMEFObject? {
-    if let msg = IDMEFObject.deserialize(jsonString: data) {
+    if let msg = IDMEFObject.deserialize(json: data) {
         print(msg)
         XCTAssert(msg["ID"] is String)
         XCTAssertEqual(msg["CreateTime"] as! String, expected["CreateTime"] as! String)
@@ -26,8 +26,8 @@ final class IDMEFDeserializeTests: XCTestCase {
             return
         }
 
-        let sensors = msg["Sensor"] as! [[AnyHashable:Any]]
-        let expectedSensors = expected["Sensor"] as! [[AnyHashable:Any]]
+        let sensors = msg["Sensor"] as! [[String:Any]]
+        let expectedSensors = expected["Sensor"] as! [[String:Any]]
                     
         XCTAssertEqual(sensors[0]["IP"] as! String, expectedSensors[0]["IP"] as! String)
     }
