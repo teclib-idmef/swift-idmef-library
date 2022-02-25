@@ -8,3 +8,17 @@ func deserialize(jsonString: String) -> [String:Any] {
     // Cast to a Swift Dictionary
     return object as! [String:Any]
 }
+
+func loadSchema(filename: String) -> [String:Any] {
+    do {
+        let json = try String(contentsOfFile: filename)
+
+        return deserialize(jsonString: json)
+    } catch {
+        return [:]
+    }
+}
+
+func simpleSchema() -> [String:Any] {
+    return loadSchema(filename: "IDMEFv2.simplified.schema")
+}
