@@ -37,8 +37,10 @@ struct IDMEFObject {
         return IDMEFObject(content: content)
     }
     
-    func validate() throws -> Bool {
-        let errors = try JSONSchema.validate(content, schema: simpleSchema())
+    func validate(simplified: Bool = true) throws -> Bool {
+        let schema = simplified ? simpleSchema() : fullSchema()
+
+        let errors = try JSONSchema.validate(content, schema: schema)
 
         return errors.valid
     }

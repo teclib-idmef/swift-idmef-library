@@ -1,15 +1,19 @@
 import XCTest
 @testable import IDMEF
 
-func validate(msg: IDMEFObject) throws {
-    if try !msg.validate() {
+func validate(msg: IDMEFObject, simplified: Bool) throws {
+    if try !msg.validate(simplified: simplified) {
         XCTFail()
     }
 }
 
 final class IDMEFValidateTests: XCTestCase {
     func test1() throws {
-        try validate(msg: message1())
+        try validate(msg: message1(), simplified: true)
+    } 
+
+    func test2() throws {
+        try validate(msg: message1(), simplified: false)
     } 
 
 }

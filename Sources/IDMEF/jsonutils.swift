@@ -22,3 +22,7 @@ func loadSchema(filename: String) -> [String:Any] {
 func simpleSchema() -> [String:Any] {
     return loadSchema(filename: "IDMEFv2.simplified.schema")
 }
+
+func fullSchema() -> [String:Any] {
+    return loadSchema(filename: "IDMEFv2.schema")
+}
