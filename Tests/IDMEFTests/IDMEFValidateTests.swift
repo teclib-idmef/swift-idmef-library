@@ -16,4 +16,8 @@ final class IDMEFValidateTests: XCTestCase {
         try validate(msg: message1(), simplified: false)
     } 
 
+    func test3() throws {
+        try validate(msg: message2(), simplified: false)
+    } 
+
 }
