@@ -1,7 +1,7 @@
 import Foundation
 
-class IDMEFExample {
-    static func message1(fixed: Bool? = true) -> IDMEFObject {
+public class IDMEFExample {
+    public static func message1(fixed: Bool? = true) -> IDMEFObject {
         var msg = IDMEFObject()
         msg["Version"] = "2.0.3"
         msg["ID"] = (fixed! as Bool) ? "09db946e-673e-49af-b4b2-a8cd9da58de6" : UUID().uuidString
@@ -36,7 +36,7 @@ class IDMEFExample {
                 "}\n"
     }
 
-    static func message2(fixed: Bool? = true) -> IDMEFObject {
+    public static func message2(fixed: Bool? = true) -> IDMEFObject {
         var  msg = IDMEFObject()
         msg["Version"] = "2.0.3"
         msg["ID"] = (fixed! as Bool) ? "fae2ece1-ea54-461a-bedb-953495d6d39c" : UUID().uuidString
