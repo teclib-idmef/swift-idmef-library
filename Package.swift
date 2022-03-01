@@ -23,6 +23,7 @@ let package = Package(
             name: "IDMEF",
             dependencies: [.product(name: "JSONSchema", package: "JSONSchema.swift")],
             resources: [
+                .copy("Resources/IDMEFv2.simplified.schema"),
                 .copy("Resources/IDMEFv2.schema")
             ]
         ),

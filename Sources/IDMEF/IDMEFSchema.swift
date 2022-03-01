@@ -1,7 +1,7 @@
 import Foundation
 struct IDMEFSchema {
 
-    static func loadSchema(filename: String) -> String {
+    static func loadFromFile(filename: String) -> String {
         do {
             let json = try String(contentsOfFile: filename)
 
@@ -11,34 +11,31 @@ struct IDMEFSchema {
         }
     }
 
+    static func loadFromResource(resourceName: String) -> String {
+        let url = Bundle.module.url(forResource: resourceName, withExtension: nil)
+        if url != nil {
+            do {
+                let json = try String(contentsOf: url!)
+                return json
+            } catch {
+            }
+        }
+       return ""
+    }
+
     static func simpleFromFile() -> [String:Any] {
-        return deserialize(jsonString: loadSchema(filename: "IDMEFv2.simplified.schema"))
+        return deserialize(jsonString: loadFromFile(filename: "IDMEFv2.simplified.schema"))
     }
 
     static func fullFromFile() -> [String:Any] {
-        return deserialize(jsonString: loadSchema(filename: "IDMEFv2.schema"))
+        return deserialize(jsonString: loadFromFile(filename: "IDMEFv2.schema"))
     }
 
     static func simple() -> [String:Any] {
-        let pp = Bundle.module.url(forResource: "IDMEFv2.schema", withExtension: nil)
-        print(pp!)
-        return simpleFromFile()
+        return deserialize(jsonString: loadFromResource(resourceName: "IDMEFv2.simplified.schema"))
     }
 
     static func full() -> [String:Any] {
-        return fullFromFile()
+        return deserialize(jsonString: loadFromResource(resourceName: "IDMEFv2.schema"))
     }
-
-    // static func simple() -> [String:Any] {
-    //     if IDMEFSimplifiedSchemaString != loadSchema(filename: "IDMEFv2.simplified.schema") {
-    //         print("WTF!!!")
-    //         return [:]
-    //     }
-    //     return deserialize(jsonString: IDMEFSimplifiedSchemaString)
-    // }
-
-    // static func full() -> [String:Any] {
-    //     return deserialize(jsonString: IDMEFFullSchemaString)
-    // }
-
 }
