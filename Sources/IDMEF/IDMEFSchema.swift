@@ -11,6 +11,14 @@ struct IDMEFSchema {
         }
     }
 
+    static func simpleFromFile() -> [String:Any] {
+        return deserialize(jsonString: loadFromFile(filename: "IDMEFv2.simplified.schema"))
+    }
+
+    static func fullFromFile() -> [String:Any] {
+        return deserialize(jsonString: loadFromFile(filename: "IDMEFv2.schema"))
+    }
+
     static func loadFromResource(resourceName: String) -> String {
         let url = Bundle.module.url(forResource: resourceName, withExtension: nil)
         if url != nil {
@@ -21,14 +29,6 @@ struct IDMEFSchema {
             }
         }
        return ""
-    }
-
-    static func simpleFromFile() -> [String:Any] {
-        return deserialize(jsonString: loadFromFile(filename: "IDMEFv2.simplified.schema"))
-    }
-
-    static func fullFromFile() -> [String:Any] {
-        return deserialize(jsonString: loadFromFile(filename: "IDMEFv2.schema"))
     }
 
     static func simple() -> [String:Any] {
