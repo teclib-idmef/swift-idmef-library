@@ -1,4 +1,4 @@
-
+import Foundation
 struct IDMEFSchema {
 
     static func loadSchema(filename: String) -> String {
@@ -20,6 +20,8 @@ struct IDMEFSchema {
     }
 
     static func simple() -> [String:Any] {
+        let pp = Bundle.module.url(forResource: "IDMEFv2.schema", withExtension: nil)
+        print(pp!)
         return simpleFromFile()
     }
 
