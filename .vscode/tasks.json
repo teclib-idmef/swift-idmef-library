@@ -4,7 +4,16 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Build documentation",
+            "label": "swift: Build Documentation",
+            "detail": "docker run swiftdoc/swift-doc",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": true
+            },
             "type": "shell",
             "command": "docker run --user=$(id -u) --volume=${workspaceFolder}/:/src -it swiftdoc/swift-doc generate /src --module-name swift-idmef --output /src/.build/documentation --format html --base-url ${workspaceFolder}/.build/documentation/",
             "problemMatcher": []
