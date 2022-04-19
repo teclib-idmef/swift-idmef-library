@@ -1,5 +1,6 @@
 import Foundation
-struct IDMEFSchema {
+
+public struct IDMEFSchema {
 
     static func loadFromFile(filename: String) -> String {
         do {

@@ -1,4 +1,5 @@
 import Foundation
+@testable import IDMEF
 
 public class IDMEFExample {
     public static func message1(fixed: Bool? = true) -> IDMEFObject {
