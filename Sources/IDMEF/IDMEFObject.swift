@@ -2,7 +2,6 @@ import Foundation
 import JSONSchema
 
 /**
- 
  IDMEF base object.
  
  This implementation provides:
