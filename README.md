@@ -53,7 +53,7 @@ dependencies: [
 
 ### Message creation
 
-A new message can be created by instantiating the `org.idmef.IDMEFObject` class. Once created, message fields can be set using the `put()` method.
+A new message can be created by instantiating the `IDMEFObject` class. Once created, message fields can be set using array subscript operator.
 
 ``` swift
 import Foundation
@@ -61,10 +61,11 @@ import Foundation
 
 @main
 public class IDMEFExample {
+
     public static func message1(fixed: Bool? = true) -> IDMEFObject {
         var msg = IDMEFObject()
         msg["Version"] = "2.0.3"
-        msg["ID"] = (fixed! as Bool) ? "09db946e-673e-49af-b4b2-a8cd9da58de6" : UUID().uuidString
+        msg["ID"] = UUID().uuidString
         msg["CreateTime"] = "2021-11-22T14:42:51.881033Z"
 
         var analyzer = [AnyHashable:Any]()
@@ -81,7 +82,7 @@ public class IDMEFExample {
     }
 
     static func main() {
-        let msg = message1()
+        let msg = IDMEFExample.message1()
         let id = msg["ID"]
         print("message ID is \(id\)")
     }
@@ -90,9 +91,16 @@ public class IDMEFExample {
 
 ### Message validation
 
-You can validate an IDMEFv2 message using `validate()` method of class `IDMEFValidator`. A `IDMEFException` is raised if the message is invalid.
+You can validate an IDMEFv2 message using `validate()` method of `IDMEFObjet`. An exception is raised if the message is invalid.
 
 ``` swift
+/* see code above to generate IDMEF message */
+
+if try !msg.validate() {
+    print("message validation error")
+}
+
+print("message is valid")
 ```
 
 ### Message serialization
@@ -100,6 +108,11 @@ You can validate an IDMEFv2 message using `validate()` method of class `IDMEFVal
 Before the message can be sent to a remote system, it must be serialized using the `serialize()` method.
 
 ``` swift
+/* see code above to generate IDMEF message */
+
+let jsonString = msg.serialize()
+
+print("JSON: \(jsonString\)")
 ```
 
 ### Message deserialization
@@ -107,6 +120,37 @@ Before the message can be sent to a remote system, it must be serialized using t
 Likewise, when a message is received in its serialized form, it must be first deserialized using the `deserialize()` class method.
 
 ``` swift
+import Foundation
+@testable import IDMEF
+
+@main
+public class IDMEFExample {
+
+    static func string1() -> String {
+        return  "{\n" +
+                "\"Version\":\"2.0.3\",\n" +
+                "\"CreateTime\":\"2021-11-22T14:42:51.881033Z\",\n" +
+                "\"ID\":\"09db946e-673e-49af-b4b2-a8cd9da58de6\",\n" +
+                "\"Analyzer\":{\n" +
+                "\"Category\":[\"LOG\"],\n" +
+                "\"IP\":\"127.0.0.1\",\n" +
+                "\"Model\":\"generic\",\n" +
+                "\"Data\":[\"Log\"],\n" +
+                "\"Method\":[\"Monitor\"],\n" +
+                "\"Name\":\"foobar\"\n" +
+                "}\n" +
+                "}\n"
+    }
+
+    static func main() {
+        if let msg = IDMEFObject.deserialize(json: IDMEFExample.string1()) {
+            print(msg)
+            let id = msg["ID"]
+            print("message ID is \(id\)")
+        }
+    }
+}
+
 ```
 
 ## Contributions
