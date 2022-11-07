@@ -43,10 +43,43 @@ This will build a bundle located in `./.build/`.
 
 The [Swift Package Manager](https://swift.org/package-manager/) is a tool for automating the distribution of Swift code and is integrated into the `swift` compiler. 
 
-Once you have your Swift package set up, adding Alamofire as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
+Once you have your Swift package set up, adding `swift-idmef-library` as a dependency is as easy as adding it to the `dependencies` value of your `Package.swift`.
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.6.1"))
+    .package(url: "https://github.com/teclib-idmef/swift-idmef-library.git", .upToNextMajor(from: "1.0.1"))
 ]
 ```
+
+### Message creation
+
+A new message can be created by instantiating the `org.idmef.IDMEFObject` class. Once created, message fields can be set using the `put()` method.
+
+``` swift
+```
+
+### Message validation
+
+You can validate an IDMEFv2 message using `validate()` method of class `IDMEFValidator`. A `IDMEFException` is raised if the message is invalid.
+
+``` swift
+```
+
+### Message serialization
+
+Before the message can be sent to a remote system, it must be serialized using the `serialize()` method.
+
+``` swift
+```
+
+### Message deserialization
+
+Likewise, when a message is received in its serialized form, it must be first deserialized using the `deserialize()` class method.
+
+``` swift
+```
+
+## Contributions
+
+All contributions must be licensed under the Apache-2.0 license. See the LICENSE file inside this repository for more information.
+
