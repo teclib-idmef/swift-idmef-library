@@ -56,6 +56,36 @@ dependencies: [
 A new message can be created by instantiating the `org.idmef.IDMEFObject` class. Once created, message fields can be set using the `put()` method.
 
 ``` swift
+import Foundation
+@testable import IDMEF
+
+@main
+public class IDMEFExample {
+    public static func message1(fixed: Bool? = true) -> IDMEFObject {
+        var msg = IDMEFObject()
+        msg["Version"] = "2.0.3"
+        msg["ID"] = (fixed! as Bool) ? "09db946e-673e-49af-b4b2-a8cd9da58de6" : UUID().uuidString
+        msg["CreateTime"] = "2021-11-22T14:42:51.881033Z"
+
+        var analyzer = [AnyHashable:Any]()
+        analyzer["IP"] = "127.0.0.1"
+        analyzer["Name"] = "foobar"
+        analyzer["Model"] = "generic"
+        analyzer["Category"] = ["LOG"]
+        analyzer["Data"] = ["Log"]
+        analyzer["Method"] = ["Monitor"]
+
+        msg["Analyzer"] = analyzer
+
+        return msg
+    }
+
+    static func main() {
+        let msg = message1()
+        let id = msg["ID"]
+        print("message ID is \(id\)")
+    }
+}
 ```
 
 ### Message validation
