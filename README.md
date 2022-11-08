@@ -57,12 +57,12 @@ A new message can be created by instantiating the `IDMEFObject` class. Once crea
 
 ``` swift
 import Foundation
-@testable import IDMEF
+import IDMEF
 
 @main
 public class IDMEFExample {
 
-    public static func message1(fixed: Bool? = true) -> IDMEFObject {
+    public static func message1() -> IDMEFObject {
         var msg = IDMEFObject()
         msg["Version"] = "2.0.3"
         msg["ID"] = UUID().uuidString
@@ -121,7 +121,7 @@ Likewise, when a message is received in its serialized form, it must be first de
 
 ``` swift
 import Foundation
-@testable import IDMEF
+import IDMEF
 
 @main
 public class IDMEFExample {
